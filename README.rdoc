@@ -1,16 +1,50 @@
-= privileged
+= Privileged
 
-Description goes here.
+Privileged provides simple, explicit permissions/authorization for your User-ish classes in only about 10 lines of code.  It was inspired by canable[https://github.com/jnunemaker/canable] and cancan[https://github.com/ryanb/cancan], but attempts to be less magical, defaults defined privileges to false, allows flexible naming, works inside or outside of Rails, does not deal with the controller or rely on current_user, and supports the multiple roles (or models/scopes) structure of devise[https://github.com/plataformatec/devise].
 
-== Contributing to privileged
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+== Example Usage
+
+    class User
+  
+      extend Privileged::Actor
+      privilege :can_create?, :creatable_by?
+      privilege :can_view?, :viewable_by?, :default => true
+      privilege :can_update?, :updatable_by?
+      privilege :can_destroy?, :destroyable_by?
+      privilege :some_ability?, :some_ability_by_user?
+  
+    end
+
+    class Page
+  
+      def creatable_by?(user)
+        user.moderator || user.age > 20
+      end
+  
+      def updatable_by?(user)
+        user.moderator
+      end
+  
+    end
+
+...in the console...
+
+    @user = User.new
+    @page = Page.new
+    
+    @user.can_create?(Page.new) # false
+    @user.age = 30
+    @user.can_create?(Page.new) # true
+    
+    @user.can_view?(@page) # true - This method first looked for a :viewable_by? method on the @page - finding none, it looked for the :default option, which we set to true - Undefined methods default to false
+    
+    @user.can_update?(@page) # false
+    @user.moderator = true
+    @user.can_update?(@page) # true
+    
+    @user.can_destroy?(@page) # false - even though :destroyable_by? is not defined in the Page class, undefined methods default to false - This can be overridden via the :default option
+    
+    @user.some_ability?(@page) # false - use any naming convention you like
 
 == Copyright
 

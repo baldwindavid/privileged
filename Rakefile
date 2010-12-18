@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "privileged"
   gem.homepage = "http://github.com/baldwindavid/privileged"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{ Simple, explicit permissions/authorization - supports Devise multiple role structure}
+  gem.description = %Q{ Simple, explicit permissions/authorization - also supports Devise multiple role structure}
   gem.email = "baldwindavid@gmail.com"
   gem.authors = ["David Baldwin"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
