@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email       = ["baldwindavid@gmail.com"]
   s.homepage    = "http://github.com/baldwindavid/privileged"
   s.summary     = %q{Simple, explicit permissions/authorization - supports Devise multiple role structure}
-  s.description = %q{Simple, explicit permissions/authorization - supports Devise multiple role structure}
+  s.description = %q{Simple, explicit permissions/authorization}
 
   s.rubyforge_project = "privileged"
   
