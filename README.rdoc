@@ -1,5 +1,7 @@
 = Privileged
 
+{<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/baldwindavid/privileged]
+
 Privileged provides simple, explicit permissions/authorization for your User-ish classes in only about 10 lines of code.  It was inspired by canable[https://github.com/jnunemaker/canable] and cancan[https://github.com/ryanb/cancan], but attempts to be less magical, defaults defined privileges to false, allows flexible naming, works inside or outside of Rails, does not deal with the controller or rely on current_user, and supports the multiple roles (or models/scopes) structure of devise[https://github.com/plataformatec/devise].
 
 == Example Usage
